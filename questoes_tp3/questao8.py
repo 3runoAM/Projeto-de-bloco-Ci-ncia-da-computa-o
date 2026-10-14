@@ -1,3 +1,6 @@
+import platform
+
+
 class No:
     def __init__(self, valor=""):
         self.valor = valor
@@ -18,15 +21,13 @@ class Trie:
             if char not in no_atual.filhos:
                 no_atual.filhos[char] = No()
             no_atual = no_atual.filhos[char]
+
         no_atual.valor = palavra
         no_atual.eh_fim_da_palavra = True
 
     def buscar(self, palavra):
-        ip, mascara = palavra.split("/")
-        octetos = ip.split(".")[:int(mascara) // 8]
-
         no_atual = self.raiz
-        for char in octetos:
+        for char in palavra.split("."):
             if char not in no_atual.filhos:
                 return False
             no_atual = no_atual.filhos[char]
@@ -49,9 +50,9 @@ class Trie:
     def exibir_arvore(self):
         def busca_em_profundidade(no, prefixo=""):
             if no.eh_fim_da_palavra:
-                print(f"|\t{prefixo[1:]}")
+                print(f"|\t{no.valor}")
             for valor, filhos in no.filhos.items():
-                busca_em_profundidade(filhos, prefixo + "." + valor )
+                busca_em_profundidade(filhos, prefixo + valor)
 
         print("| Exibindo palavras encontradas na Trie")
         busca_em_profundidade(self.raiz)
