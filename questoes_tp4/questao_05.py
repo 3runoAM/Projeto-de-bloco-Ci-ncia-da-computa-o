@@ -6,7 +6,7 @@ class Aviao:
         self.tempo_pouso = tempo_pouso
 
     def aviao_tupla(self):
-        return (self.tempo_solicitacao, self.combustivel, self.tempo_pouso)
+        return (self.combustivel, self.tempo_solicitacao, self.tempo_pouso)
 
 class MinHeap:
     def __init__(self):
@@ -79,7 +79,6 @@ class MinHeap:
                 f"|\tAVIÃO: {id}, Tempo de Solicitação: {tempo_solicitacao}, Combustível: {combustivel}, Tempo de Pouso: {tempo_pouso}")
             index += 1
 
-
     def _olhar(self):
         if self._heap:
             return self._heap[0]
@@ -128,15 +127,24 @@ class FilaDePrioridade:
 
 
 fila = FilaDePrioridade()
-fila.enqueue(1, 9, 3)   # tempo_solicitacao, combustivel, tempo_pouso
-fila.enqueue(2, 5, 2)   # Pouco combustível (quase crítico)
-fila.enqueue(2, 5, 4) # Combustível muito alto (não fica sem)
-fila.enqueue(3, 2, 2)   # Combustível crítico
-fila.enqueue(4, 2, 3)  # Combustível alto (não fica sem)
 
+
+fila.enqueue(4, 2, 3)  # Combustível alto (não fica sem)
+fila.enqueue(3, 2, 2)   # Combustível crítico
+fila.enqueue(2, 5, 4) # Combustível muito alto (não fica sem)
+fila.enqueue(2, 5, 2)   # Pouco combustível (quase crítico)
+fila.enqueue(1, 9, 3)   # tempo_solicitacao, combustivel, tempo_pouso
 
 print("| Aeropoto com fila de prioridade")
 fila._min_heap.imprimir()
+
+print("| Pousando avião...")
+
+aviao = fila.dequeue()
+if aviao:
+    print(f"|\tAVIÃO: {aviao.id}, Tempo de Solicitação: {aviao.tempo_solicitacao}, Combustível: {aviao.combustivel}, Tempo de Pouso: {aviao.tempo_pouso}")
+
+fila.mostrar_avioes_sem_combustivel()
 
 print("| Pousando avião...")
 
