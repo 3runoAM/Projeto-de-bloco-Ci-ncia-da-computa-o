@@ -15,19 +15,11 @@ class MinHeap:
         self._heap[i], self._heap[j] = self._heap[j], self._heap[i]
 
     def sift_up(self, index):
-        pai_index = self._get_pai_index(index)
         while index > 0:
-            if self._heap[index][1] < self._heap[pai_index][1]:
+            pai_index = self._get_pai_index(index)
+            if self._heap[index][1:] < self._heap[pai_index][1:]:
                 self._troca(index, pai_index)
                 index = pai_index
-                pai_index = self._get_pai_index(index)
-            elif self._heap[index][1] == self._heap[pai_index][1]:
-                if self._heap[index][2] < self._heap[pai_index][2]:
-                    self._troca(index, pai_index)
-                    index = pai_index
-                    pai_index = self._get_pai_index(index)
-                else:
-                    break
             else:
                 break
 
@@ -38,15 +30,11 @@ class MinHeap:
             filhoD_index = self._get_filho_direito_index(index)
             menor = index
 
-            if filhoE_index <= ultimo_index and self._heap[filhoE_index][1] < self._heap[menor][1]:
+            if filhoE_index <= ultimo_index and self._heap[filhoE_index][1:] < self._heap[menor][1:]:
                 menor = filhoE_index
-            elif filhoE_index <= ultimo_index and self._heap[filhoE_index][1] == self._heap[menor][1]:
-                    menor = filhoE_index if self._heap[filhoE_index][2] < self._heap[menor][2] else menor
 
-            if filhoD_index <= ultimo_index and self._heap[filhoD_index][1] < self._heap[menor][1]:
+            if filhoD_index <= ultimo_index and self._heap[filhoD_index][1:] < self._heap[menor][1:]:
                 menor = filhoD_index
-            elif filhoD_index <= ultimo_index and self._heap[filhoD_index][1] == self._heap[menor][1]:
-                menor = filhoD_index if self._heap[filhoD_index][2] < self._heap[menor][2] else menor
 
             if menor != index:
                 self._troca(index, menor)
