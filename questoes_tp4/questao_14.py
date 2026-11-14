@@ -47,4 +47,4 @@ grafo.adicionar_aresta(5, 6)
 print("| Grafo com lista de adjacências construído")
 grafo.imprimir_lista()
 
-print(f"| Tem ciclo: {grafo.tem_ciclo(0)}")
+print(f"| Tem ciclo? {"Sim " if grafo.tem_ciclo(0) else "Não"}")
