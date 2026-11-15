@@ -12,7 +12,7 @@ def servidor():
     server_socket.bind((HOST, PORT))
     server_socket.listen(1)
 
-    print(f"| Servidor online EM {HOST}:{PORT}")
+    print(f"| Servidor online EM {HOST}: {PORT}")
     print(f"| Aguardando cliente...")
     client_socket, client_address = server_socket.accept()
 
